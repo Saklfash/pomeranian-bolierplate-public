@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { EditIcon } from '../Components/Icons/EditIcon';
 
 import './styles/aside.css';
 
@@ -11,10 +12,11 @@ export function AppAside() {
             <NavLink to="dashboard">Dashboard</NavLink>
           </li>
           <li>
-            <NavLink to="blocks">Bloki</NavLink>
+            <EditIcon />
+            <NavLink to="exercises">Ćwiczenia</NavLink>
           </li>
           <li>
-            <NavLink to="exercises">Ćwiczenia</NavLink>
+            <NavLink to="blocks">Bloki</NavLink>
           </li>
         </ul>
       </nav>
