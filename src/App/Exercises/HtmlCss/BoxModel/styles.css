@@ -6,6 +6,9 @@
   padding: 30px;
   background-color: yellow;
   width: 500px;
+  width: 100%;
+  width: 40em;
+  width: 40rem;
 }
 
 span {
