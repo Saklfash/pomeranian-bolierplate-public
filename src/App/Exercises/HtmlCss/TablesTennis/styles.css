@@ -1,0 +1,41 @@
+:root {
+  --border-radius: 15px;
+  --pink-color: #FFD5DB
+}
+
+.table-players {
+  width: 715px;
+  box-shadow: 0px 63.661766052246094px 158.44705200195312px 0px #0000000F, 0px 32.22876739501953px 69.07301330566406px 0px #0000000A, 0px 12.732353210449219px 25.747648239135742px 0px #00000008, 0px 2.7852022647857666px 9.1602201461792px 0px #00000005;
+  border-radius: var(--border-radius);
+}
+
+.table-players tr:last-child td:first-child {
+  border-bottom-left-radius: var(--border-radius);
+}
+
+.table-players tr:last-child td:last-child {
+  border-bottom-right-radius: var(--border-radius);
+}
+
+.table-players tr {
+  background-color: white;
+}
+
+.table-players tr td,
+.table-players tr th {
+  padding: 19px 28px;
+  border: none;
+}
+
+.table-players tr:nth-child(odd) {
+  background-color: var(--pink-color);
+}
+
+.table-players tr:nth-child(1) {
+  background: #F5F5F5;
+  border-bottom: 1px solid var(--pink-color);
+}
+
+.table-rating {
+  text-align: right;
+}
