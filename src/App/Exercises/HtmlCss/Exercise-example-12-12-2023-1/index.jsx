@@ -1,15 +1,24 @@
-import { RoundImage } from '../../../Components/RoundImage';
 import './styles.css';
 
 export function Exercise() {
   return (
     <>
-      <RoundImage url="https://media.licdn.com/dms/image/D4D03AQGmpz3QYUd46g/profile-displayphoto-shrink_200_200/0/1688659151125?e=1698883200&v=beta&t=r-JchaH7Ukw8WNJ9rZqPMnYl2R07tHdxCyELAADNeSA" />
-      <RoundImage url="https://cdn.pixabay.com/photo/2017/09/01/00/15/png-2702691_960_720.png" />
-      <RoundImage
-        url="http://localhost:3000/static/media/start-it-logo.4890350e3ed663a2608637db45566892.svg"
-        size="50px"
-      />
+      <div className="grid">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+      </div>
+      <div className="flex">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+      </div>
     </>
   );
 }
