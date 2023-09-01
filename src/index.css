@@ -6,6 +6,9 @@
   --color-black: #000000;
   --color-grey: rgb(60, 64, 67);
   --color-white: rgb(255, 255, 255);
+  --border-radius: 15px;
+  --pink-color: #FE3756;
+
 }
 
 body {
