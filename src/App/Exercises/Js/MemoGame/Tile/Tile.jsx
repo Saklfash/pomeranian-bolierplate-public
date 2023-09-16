@@ -1,17 +1,15 @@
-import mole from '../../../../Images/mole.svg';
 import './styles.css';
 
-// isMole - true/false
-
-export const Tile = ({ onClick, isMole }) => {
+export const Tile = ({ onClick, char, isVisible, isGuessed, isCorrect }) => {
+  const shouldShow = isVisible || isGuessed;
   return (
     <button
-      className={`mole-tile mole-tile-neutral ${
-        isMole ? 'mole-with-mole' : ''
-      }`}
+      className={`memo-tile ${isVisible && 'memo-visible'} ${
+        !isCorrect && 'memo-incorrect'
+      } ${isGuessed && 'memo-guessed'}`}
       onClick={onClick}
     >
-      {isMole && <img src={mole} alt="Obrazek kreta" />}
+      {shouldShow && char}
     </button>
   );
 };

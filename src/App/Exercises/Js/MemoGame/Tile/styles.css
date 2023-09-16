@@ -1,23 +1,26 @@
-.mole-tile {
-  width: 3rem;
-  height: 3rem;
+.memo-tile {
+  width: 8rem;
+  height: 8rem;
   flex-shrink: 0;
   border-radius: 0.5rem;
-}
-
-.mole-tile img {
-  width: 100%;
-  height: 100%;
-}
-
-.mole-tile-neutral {
+  border: none;
+  box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.3);
   background-color: #ebebeb;
+  font-size: 5rem;
 }
 
-.mole-tile:active {
+.memo-tile:active {
+  background-color: rgb(169, 238, 238);
+}
+
+.memo-visible {
+  background-color: #e2fbd7;
+}
+
+.memo-incorrect {
   background-color: #f3aea8;
 }
 
-.mole-with-mole:active {
+.memo-guessed {
   background-color: #e2fbd7;
 }
