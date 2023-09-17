@@ -19,9 +19,9 @@ export const HitTheMoleGame = () => {
   //getter i setter
   const [status, setStatus] = useState('notStarted');
   const [score, setScore] = useState(0);
-  const [duration, setDuration] = useState(MINUTE);
+  const [duration, setDuration] = useState(0);
   const [resultTime, setResultTime] = useState(0);
-  const [molesNo, setMolesNo] = useState(1);
+  const [molesNo, setMolesNo] = useState(0);
   const [moles, setMoles] = useState([]);
   const [molesTimeouts, setMolesTimeouts] = useState({});
   const [tiles, setTiles] = useState([]);

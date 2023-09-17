@@ -23,7 +23,7 @@ function shuffleArray(s) {
   return s;
 }
 
-const ELEMENT_OPTIONS = [8, 16, 20, 24];
+const ELEMENT_OPTIONS = [8, 16, 20];
 const GAME_CHARACTERS = [
   '☀',
   '☁',
@@ -40,8 +40,8 @@ const GAME_CHARACTERS = [
 ];
 
 export const MemoGame = () => {
-  const [status, setStatus] = useState('notStarted');
-  const [elementsNumber, setElementsNumber] = useState(ELEMENT_OPTIONS[0]);
+  const [status, setStatus] = useState('notStarted'); // notStarted, started, finished
+  const [elementsNumber, setElementsNumber] = useState();
   const [moves, setMoves] = useState(0);
   const [duration, setDuration] = useState(0);
   const [tiles, setTiles] = useState([]);
@@ -98,6 +98,10 @@ export const MemoGame = () => {
   }, [tiles]);
 
   const handleStart = () => {
+    if (!elementsNumber) {
+      setStatus('startError');
+      return;
+    }
     setStatus('started');
     setMoves(0);
     setDuration(0);
@@ -109,6 +113,7 @@ export const MemoGame = () => {
   const handleStop = () => {
     setStatus('finished');
     setIsActiveTimer(false);
+    setElementsNumber();
     setTiles([]);
   };
 
@@ -183,7 +188,12 @@ export const MemoGame = () => {
       )}
       {status !== 'started' && (
         <>
-          <GameSettings label="LICZBA ELEMENTÓW">
+          <GameSettings
+            label="LICZBA ELEMENTÓW"
+            errorMessage={
+              status === 'startError' && !elementsNumber && 'Wybierz elementy'
+            }
+          >
             {ELEMENT_OPTIONS.map((option) => (
               <OptionButton
                 isSelected={elementsNumber !== option}
@@ -208,17 +218,14 @@ export const MemoGame = () => {
               <TimeTracker time={duration} />
             </GameSettingsOutput>
           </GameSettings>
-
-          <div className="mole-settings-container">
-            <span className="mole-label">LICZBA RUCHÓW</span>
-            <span className="mole-output">{formatMoves(moves)}</span>
-          </div>
-          <div className="mole-settings-container">
-            <span className="mole-label">Przyciski sterujące</span>
+          <GameSettings label="LICZBA RUCHÓW">
+            <GameSettingsOutput>{formatMoves(moves)}</GameSettingsOutput>
+          </GameSettings>
+          <GameSettings label="Przyciski sterujące">
             <Button onClick={handleStop} variant="tertiary">
               Stop
             </Button>
-          </div>
+          </GameSettings>
         </>
       )}
       <div className="memo-tile-board">

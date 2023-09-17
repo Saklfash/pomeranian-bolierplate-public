@@ -1,9 +1,16 @@
 import './styles.css';
 
-export const GameSettings = ({ children, label }) => {
+export const GameSettings = ({ children, label, errorMessage }) => {
   return (
-    <div className="game-settings-container">
-      <span className="game-label">{label}</span>
+    <div
+      className={`game-settings-container ${
+        errorMessage ? 'game-settings-container-error' : ''
+      }`}
+    >
+      <span className="game-label">
+        {label}
+        <span className="game-label-error">{errorMessage}</span>
+      </span>
       {children}
     </div>
   );
