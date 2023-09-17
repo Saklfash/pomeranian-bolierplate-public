@@ -25,6 +25,20 @@ function shuffleArray(s) {
 }
 
 const ELEMENT_OPTIONS = [8, 16, 20, 24];
+const GAME_CHARACTERS = [
+  '☀',
+  '☁',
+  '☯',
+  '★',
+  '♠',
+  '♣',
+  '♥',
+  '♦',
+  '♫',
+  '♪',
+  '⚬',
+  '⚑',
+];
 
 export const MemoGame = () => {
   const [status, setStatus] = useState('notStarted');
@@ -136,20 +150,7 @@ export const MemoGame = () => {
 
   const getInitialTiles = () => {
     const charsNumber = elementsNumber / 2;
-    const characters = [
-      '☀',
-      '☁',
-      '☯',
-      '★',
-      '♠',
-      '♣',
-      '♥',
-      '♦',
-      '♫',
-      '♪',
-      '⚬',
-      '⚑',
-    ];
+    const characters = shuffleArray([...GAME_CHARACTERS]);
     characters.length = charsNumber;
     const arrayOfTilesObjects = [];
     characters.forEach((char) => {
