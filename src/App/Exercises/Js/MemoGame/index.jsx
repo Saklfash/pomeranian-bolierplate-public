@@ -12,6 +12,10 @@ function formatTime(duration) {
   return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
 }
 
+function formatMoves(moves) {
+  return Math.ceil(moves / 2);
+}
+
 function shuffleArray(s) {
   for (let i = s.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -46,12 +50,15 @@ export const MemoGame = () => {
   // refresh after tile select
   useEffect(() => {
     setTiles((tiles) => {
-      return tiles.map((tile) => ({
-        ...tile,
-        isVisible: selectedTiles.find(
-          (selectedTile) => selectedTile.id === tile.id
-        ),
-      }));
+      const areMatch = areSelectedTilesMatch();
+      return tiles.map((tile) => {
+        const isSelected = isTileSelected(tile.id);
+        return {
+          ...tile,
+          isVisible: isSelected,
+          isGuessed: tile.isGuessed || (isSelected && areMatch),
+        };
+      });
     });
   }, [selectedTiles]);
 
@@ -87,9 +94,19 @@ export const MemoGame = () => {
     });
   };
 
+  const isTileSelected = (id) => {
+    return !!selectedTiles.find((selectedTile) => selectedTile.id === id);
+  };
+
+  const areSelectedTilesMatch = () => {
+    const [tile1, tile2] = selectedTiles;
+    const areMatch =
+      !!tile1 && !!tile2 && tile1.char === tile2.char && tile1.id !== tile2.id;
+    return areMatch;
+  };
+
   const getInitialTiles = () => {
     const characters = ['☀', '☁', '☯', '★', '♠', '♣', '♥', '♦'];
-
     const arrayOfTilesObjects = [];
     characters.forEach((char) => {
       arrayOfTilesObjects.push({
@@ -116,7 +133,7 @@ export const MemoGame = () => {
       </p>
       {status === 'finished' && (
         <div className="mole-result">
-          Gratulację! Twój wynik to {moves} ruchów w czasie{' '}
+          Gratulację! Twój wynik to {formatMoves(moves)} ruchów w czasie{' '}
           {formatTime(duration)}!
         </div>
       )}
@@ -189,7 +206,7 @@ export const MemoGame = () => {
           </div>
           <div className="mole-settings-container">
             <span className="mole-label">LICZBA RUCHÓW</span>
-            <span className="mole-output">{moves}</span>
+            <span className="mole-output">{formatMoves(moves)}</span>
           </div>
           <div className="mole-settings-container">
             <span className="mole-label">Przyciski sterujące</span>
@@ -206,7 +223,7 @@ export const MemoGame = () => {
                 char={char}
                 isVisible={isVisible}
                 isGuessed={isGuessed}
-                isCorrect={true}
+                isCorrect={selectedTiles.length < 2 || areSelectedTilesMatch()}
               />
             ))}
           </div>
