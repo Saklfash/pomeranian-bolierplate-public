@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { Button } from '../../../Components/Button';
+import { Button, OptionButton } from '../../../Components/Button';
 import { TimeTracker } from '../../../Components/TimeTracker';
 import { MainHeader } from '../../../Components/MainHeader';
 
@@ -194,8 +194,16 @@ export const HitTheMoleGame = () => {
         <>
           <div className="mole-settings-container">
             <span className="mole-label">czas gry</span>
-            <Button
-              id="1"
+            <OptionButton
+              isSelected={duration !== MINUTE}
+              onClick={() => {
+                setDuration(MINUTE);
+                setMinutes(MINUTE);
+              }}
+            >
+              1 minuta
+            </OptionButton>
+            {/* <Button
               variant={duration !== MINUTE ? 'primary' : 'secondary'}
               onClick={() => {
                 setDuration(MINUTE);
@@ -203,7 +211,7 @@ export const HitTheMoleGame = () => {
               }}
             >
               1 minuta
-            </Button>
+            </Button> */}
             <Button
               variant={duration !== 2 * MINUTE ? 'primary' : 'secondary'}
               onClick={() => {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { Button } from '../../../Components/Button';
+import { Button, OptionButton } from '../../../Components/Button';
 import { TimeTracker } from '../../../Components/TimeTracker';
 import { MainHeader } from '../../../Components/MainHeader';
 
@@ -182,13 +182,13 @@ export const MemoGame = () => {
           <div className="mole-settings-container">
             <span className="mole-label">LICZBA ELEMENTÓW</span>
             {ELEMENT_OPTIONS.map((option) => (
-              <Button
-                variant={elementsNumber !== option ? 'primary' : 'secondary'}
+              <OptionButton
+                isSelected={elementsNumber === option}
                 onClick={() => setElementsNumber(option)}
                 key={option}
               >
                 {option} elementów
-              </Button>
+              </OptionButton>
             ))}
           </div>
           <div className="mole-settings-container">
