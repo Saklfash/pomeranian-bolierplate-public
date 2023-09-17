@@ -118,15 +118,13 @@ export const MemoGame = () => {
   };
 
   const isTileSelected = (id) => {
-    return !!selectedTiles.find((selectedTile) => selectedTile.id === id);
+    return selectedTiles.some((selectedTile) => selectedTile.id === id);
   };
 
   const isGameFinished = () => {
-    let isFinished = true;
-    for (const tile of tiles) {
-      isFinished = isFinished && tile.isGuessed;
-    }
-    return isFinished && tiles.length !== 0;
+    const isEveryTilesGuessed = tiles.every((tile) => tile.isGuessed);
+
+    return isEveryTilesGuessed && tiles.length !== 0;
   };
 
   const areSelectedTilesMatch = () => {
@@ -138,7 +136,6 @@ export const MemoGame = () => {
 
   const getInitialTiles = () => {
     const charsNumber = elementsNumber / 2;
-    debugger;
     const characters = [
       '☀',
       '☁',
