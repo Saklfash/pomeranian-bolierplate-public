@@ -15,7 +15,7 @@
 }
 
 .mole-label {
-  text-transform: uppercase;
+  text-transform: lowercase;
   flex-basis: 12rem;
 }
 

@@ -1,16 +1,11 @@
 import { useEffect, useState } from 'react';
 
 import { Button } from '../../../Components/Button';
+import { TimeTracker } from '../../../Components/TimeTracker';
 import { MainHeader } from '../../../Components/MainHeader';
 
 import './styles.css';
 import { Tile } from './Tile/Tile';
-
-function formatTime(duration) {
-  const minutes = Math.floor(duration / 60);
-  const seconds = duration % 60;
-  return `${minutes}:${seconds < 10 ? `0${seconds}` : seconds}`;
-}
 
 function formatMoves(moves) {
   return Math.ceil(moves / 2);
@@ -179,7 +174,7 @@ export const MemoGame = () => {
       {status === 'finished' && (
         <div className="mole-result">
           Gratulację! Twój wynik to {formatMoves(moves)} ruchów w czasie{' '}
-          {formatTime(duration)}!
+          <TimeTracker time={duration} />!
         </div>
       )}
       {status !== 'started' && (
@@ -208,7 +203,9 @@ export const MemoGame = () => {
         <>
           <div className="mole-settings-container">
             <span className="mole-label">CZAS GRY</span>
-            <span className="mole-output">{formatTime(duration)}</span>
+            <span className="mole-output">
+              <TimeTracker time={duration} />
+            </span>
           </div>
           <div className="mole-settings-container">
             <span className="mole-label">LICZBA RUCHÓW</span>
