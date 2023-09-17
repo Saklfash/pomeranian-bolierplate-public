@@ -31,6 +31,7 @@ export const MemoGame = () => {
   const [tiles, setTiles] = useState([]);
   const [selectedTiles, setSelectedTiles] = useState([]);
   const [isActiveTimer, setIsActiveTimer] = useState(false); // Flaga aktywności licznika
+  const [selectedTilesTimeout, setSelectedTilesTimeout] = useState();
 
   //react lifecycle hook
   useEffect(() => {
@@ -49,8 +50,12 @@ export const MemoGame = () => {
 
   // refresh after tile select
   useEffect(() => {
+    const areMatch = areSelectedTilesMatch();
+    if (selectedTilesTimeout) {
+      clearTimeout(selectedTilesTimeout);
+    }
+
     setTiles((tiles) => {
-      const areMatch = areSelectedTilesMatch();
       return tiles.map((tile) => {
         const isSelected = isTileSelected(tile.id);
         return {
@@ -60,6 +65,13 @@ export const MemoGame = () => {
         };
       });
     });
+
+    if (selectedTiles.length === 2 && !areMatch) {
+      const timeout = setTimeout(() => {
+        setSelectedTiles([]);
+      }, 3000);
+      setSelectedTilesTimeout(timeout);
+    }
   }, [selectedTiles]);
 
   useEffect(() => {
