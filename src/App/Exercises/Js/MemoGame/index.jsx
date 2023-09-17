@@ -24,8 +24,11 @@ function shuffleArray(s) {
   return s;
 }
 
+const ELEMENT_OPTIONS = [8, 16, 20, 24];
+
 export const MemoGame = () => {
   const [status, setStatus] = useState('notStarted');
+  const [elementsNumber, setElementsNumber] = useState(ELEMENT_OPTIONS[0]);
   const [moves, setMoves] = useState(0);
   const [duration, setDuration] = useState(0);
   const [tiles, setTiles] = useState([]);
@@ -134,7 +137,23 @@ export const MemoGame = () => {
   };
 
   const getInitialTiles = () => {
-    const characters = ['☀', '☁', '☯', '★', '♠', '♣', '♥', '♦'];
+    const charsNumber = elementsNumber / 2;
+    debugger;
+    const characters = [
+      '☀',
+      '☁',
+      '☯',
+      '★',
+      '♠',
+      '♣',
+      '♥',
+      '♦',
+      '♫',
+      '♪',
+      '⚬',
+      '⚑',
+    ];
+    characters.length = charsNumber;
     const arrayOfTilesObjects = [];
     characters.forEach((char) => {
       arrayOfTilesObjects.push({
@@ -167,57 +186,18 @@ export const MemoGame = () => {
       )}
       {status !== 'started' && (
         <>
-          {/* 
-          // TODO add select for elements number
           <div className="mole-settings-container">
-            <span className="mole-label">czas gry</span>
-            <Button
-              id="1"
-              variant={duration !== MINUTE ? 'primary' : 'secondary'}
-              onClick={() => {
-                setDuration(MINUTE);
-                setMinutes(MINUTE);
-              }}
-            >
-              1 minuta
-            </Button>
-            <Button
-              variant={duration !== 2 * MINUTE ? 'primary' : 'secondary'}
-              onClick={() => {
-                setDuration(2 * MINUTE);
-                setMinutes(2 * MINUTE);
-              }}
-            >
-              2 minuty
-            </Button>
-            <Button
-              variant={duration !== 3 * MINUTE ? 'primary' : 'secondary'}
-              onClick={() => setDuration(3 * MINUTE)}
-            >
-              3 minuty
-            </Button>
+            <span className="mole-label">LICZBA ELEMENTÓW</span>
+            {ELEMENT_OPTIONS.map((option) => (
+              <Button
+                variant={elementsNumber !== option ? 'primary' : 'secondary'}
+                onClick={() => setElementsNumber(option)}
+                key={option}
+              >
+                {option} elementów
+              </Button>
+            ))}
           </div>
-          <div className="mole-settings-container">
-            <span className="mole-label">liczba kretów</span>
-            <Button
-              variant={molesNo !== 1 ? 'primary' : 'secondary'}
-              onClick={() => setMolesNo(1)}
-            >
-              1 kret
-            </Button>
-            <Button
-              variant={molesNo !== 2 ? 'primary' : 'secondary'}
-              onClick={() => setMolesNo(2)}
-            >
-              2 krety
-            </Button>
-            <Button
-              variant={molesNo !== 3 ? 'primary' : 'secondary'}
-              onClick={() => setMolesNo(3)}
-            >
-              3 krety
-            </Button>
-          </div> */}
           <div className="mole-settings-container">
             <span className="mole-label">przyciski sterujące</span>
             <Button onClick={handleStart}>Start</Button>
