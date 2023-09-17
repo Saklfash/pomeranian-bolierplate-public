@@ -203,15 +203,6 @@ export const HitTheMoleGame = () => {
             >
               1 minuta
             </OptionButton>
-            {/* <Button
-              variant={duration !== MINUTE ? 'primary' : 'secondary'}
-              onClick={() => {
-                setDuration(MINUTE);
-                setMinutes(MINUTE);
-              }}
-            >
-              1 minuta
-            </Button> */}
             <Button
               variant={duration !== 2 * MINUTE ? 'primary' : 'secondary'}
               onClick={() => {

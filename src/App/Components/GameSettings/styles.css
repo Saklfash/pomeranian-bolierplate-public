@@ -1,0 +1,21 @@
+.game-settings-container {
+    display: flex;
+    margin-bottom: 1.5em;
+    column-gap: 1.5rem;
+    align-items: center;
+}
+
+.game-label {
+    text-transform: uppercase;
+    flex-basis: 12rem;
+}
+
+.game-output {
+    min-width: 10.2rem;
+    display: flex;
+    height: 3.5rem;
+    padding: 1.25rem 2.25rem;
+    justify-content: center;
+    align-items: center;
+    background: #ebebeb;
+}

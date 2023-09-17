@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 
 import { Button, OptionButton } from '../../../Components/Button';
 import { TimeTracker } from '../../../Components/TimeTracker';
+import {
+  GameSettings,
+  GameSettingsOutput,
+} from '../../../Components/GameSettings';
 import { MainHeader } from '../../../Components/MainHeader';
 
 import './styles.css';
@@ -166,47 +170,45 @@ export const MemoGame = () => {
   };
 
   return (
-    <div className="hit-the-mole-game">
+    <div className="memo-game">
       <MainHeader>Memo</MainHeader>
-      <p className="mole-description">
+      <p className="memo-description">
         Gra polegająca na zapamiętywaniu odkrytych kafli i łączeniu ich w pary
       </p>
       {status === 'finished' && (
-        <div className="mole-result">
+        <div className="memo-result">
           Gratulację! Twój wynik to {formatMoves(moves)} ruchów w czasie{' '}
           <TimeTracker time={duration} />!
         </div>
       )}
       {status !== 'started' && (
         <>
-          <div className="mole-settings-container">
-            <span className="mole-label">LICZBA ELEMENTÓW</span>
+          <GameSettings label="LICZBA ELEMENTÓW">
             {ELEMENT_OPTIONS.map((option) => (
               <OptionButton
-                isSelected={elementsNumber === option}
+                isSelected={elementsNumber !== option}
                 onClick={() => setElementsNumber(option)}
                 key={option}
               >
                 {option} elementów
               </OptionButton>
             ))}
-          </div>
-          <div className="mole-settings-container">
-            <span className="mole-label">przyciski sterujące</span>
+          </GameSettings>
+          <GameSettings label="przyciski sterujące">
             <Button onClick={handleStart}>Start</Button>
-          </div>
+          </GameSettings>
         </>
       )}
 
       {/* conditional rendering of jsx w React  */}
       {status === 'started' && (
         <>
-          <div className="mole-settings-container">
-            <span className="mole-label">CZAS GRY</span>
-            <span className="mole-output">
+          <GameSettings label="CZAS GRY">
+            <GameSettingsOutput>
               <TimeTracker time={duration} />
-            </span>
-          </div>
+            </GameSettingsOutput>
+          </GameSettings>
+
           <div className="mole-settings-container">
             <span className="mole-label">LICZBA RUCHÓW</span>
             <span className="mole-output">{formatMoves(moves)}</span>
@@ -219,7 +221,7 @@ export const MemoGame = () => {
           </div>
         </>
       )}
-      <div className="mole-tile-board">
+      <div className="memo-tile-board">
         {tiles.map(({ id, char, isVisible, isGuessed }) => (
           <Tile
             key={id}
