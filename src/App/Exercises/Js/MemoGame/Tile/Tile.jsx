@@ -13,7 +13,7 @@ export const Tile = ({ onClick, char, isVisible, isGuessed, isCorrect }) => {
       onClick={onClick}
       disabled={isGuessed || (isVisible && isCorrect)}
     >
-      {char}
+      {shouldShow && char}
     </button>
   );
 };

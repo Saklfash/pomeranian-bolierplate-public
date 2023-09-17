@@ -62,6 +62,13 @@ export const MemoGame = () => {
     });
   }, [selectedTiles]);
 
+  useEffect(() => {
+    if (isGameFinished()) {
+      setStatus('finished');
+      setIsActiveTimer(false);
+    }
+  }, [tiles]);
+
   const handleStart = () => {
     setStatus('started');
     setMoves(0);
@@ -74,6 +81,7 @@ export const MemoGame = () => {
   const handleStop = () => {
     setStatus('finished');
     setIsActiveTimer(false);
+    setTiles([]);
   };
 
   const handleTileClick = (id) => () => {
@@ -96,6 +104,14 @@ export const MemoGame = () => {
 
   const isTileSelected = (id) => {
     return !!selectedTiles.find((selectedTile) => selectedTile.id === id);
+  };
+
+  const isGameFinished = () => {
+    let isFinished = true;
+    for (const tile of tiles) {
+      isFinished = isFinished && tile.isGuessed;
+    }
+    return isFinished && tiles.length !== 0;
   };
 
   const areSelectedTilesMatch = () => {
@@ -214,21 +230,20 @@ export const MemoGame = () => {
               Stop
             </Button>
           </div>
-
-          <div className="mole-tile-board">
-            {tiles.map(({ id, char, isVisible, isGuessed }) => (
-              <Tile
-                key={id}
-                onClick={handleTileClick(id)}
-                char={char}
-                isVisible={isVisible}
-                isGuessed={isGuessed}
-                isCorrect={selectedTiles.length < 2 || areSelectedTilesMatch()}
-              />
-            ))}
-          </div>
         </>
       )}
+      <div className="mole-tile-board">
+        {tiles.map(({ id, char, isVisible, isGuessed }) => (
+          <Tile
+            key={id}
+            onClick={handleTileClick(id)}
+            char={char}
+            isVisible={isVisible}
+            isGuessed={isGuessed}
+            isCorrect={selectedTiles.length < 2 || areSelectedTilesMatch()}
+          />
+        ))}
+      </div>
     </div>
   );
 };
